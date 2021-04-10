@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>OpenSourceImportDate</key>
+		<string>2021-4-8</string>
+		<key>OpenSourceLicense</key>
+		<string>Vampire-Cat</string>
+		<key>OpenSourceLicenseFile</key>
+		<string>fcrackzip.txt</string>
+		<key>OpenSourceModifications</key>
+		<array>
+			<string>Porting fixes for Mac OS X</string>
+		</array>
+		<key>OpenSourceProject</key>
+		<string>fcrackzip</string>
+		<key>OpenSourceURL</key>
+		<string>https://github.com/hyc/fcrackzip</string>
+		<key>OpenSourceVersion</key>
+		<string>1.0</string>
+		<key>OpenSourceWebsiteURL</key>
+		<string>http://oldhome.schmorp.de/marc/fcrackzip.html</string>
+	</dict>
+</array>
+</plist>

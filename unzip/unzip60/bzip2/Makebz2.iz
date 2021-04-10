@@ -1,0 +1,62 @@
+# Makefile for UnZip's bzip2 support library
+# Unix, and other ports using sufficiently unix-compatible
+# library naming conventions (e.g. misc. GCC ports)
+#
+# (c) 2006-2007 Info-ZIP
+# Last revision: Christian Spieler, 2007-Mar-31
+#
+# This Makefile is intended to be called from UnZip's main make procedure.
+
+SHELL=/bin/sh
+MAC_VERSION = 11.0
+
+# To assist in cross-compiling
+CC=gcc
+AR=ar
+RANLIB=ranlib
+RM=rm -f
+LDFLAGS=
+O=.o
+
+CFLAGS=-Os -mmacosx-version-min=$(MAC_VERSION) -Wall -Winline -gdwarf -arch x86_64 -arch arm64
+CCBZ2DEFS=-DBZ_NO_STDIO
+
+OBJS= blocksort$(O)  \
+      huffman$(O)    \
+      crctable$(O)   \
+      randtable$(O)  \
+      compress$(O)   \
+      decompress$(O) \
+      bzlib$(O) \
+      arm64/crc32vec$(O) \
+      x86_64/crc32vec$(O)
+
+# How to compile sources
+.c$(O):
+	$(CC) $(CFLAGS) $(CCBZ2DEFS) -o $@ -c $<
+
+.s$(O):
+	$(CC) $(CFLAGS) $(CCBZ2DEFS) -o $@ -c $<
+
+all: libbz2.a
+
+libbz2.a: $(OBJS)
+	$(RM) -f libbz2.a
+	$(AR) cq libbz2.a $(OBJS)
+	$(RANLIB) libbz2.a
+
+libbz2.dylib: $(OBJS)
+	$(CC) -dynamiclib -o $@ $(OBJS)
+
+clean:
+	$(RM) $(OBJS) libbz2.a
+
+$(OBJS): bzlib.h bzlib_private.h
+
+blocksort$(O): blocksort.c
+huffman$(O): huffman.c
+crctable$(O): crctable.c
+randtable$(O): randtable.c
+compress$(O): compress.c
+decompress$(O): decompress.c
+bzlib$(O): bzlib.c
